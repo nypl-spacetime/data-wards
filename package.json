@@ -1,34 +1,19 @@
 {
-  "name": "histograph-data-wards",
-  "version": "0.6.0",
+  "name": "spacetime-etl-wards",
+  "version": "0.6.1",
   "description": "Convert NYC wards shapefiles to Histograph NDJSON",
   "main": "geonames.js",
   "devDependencies": {
-    "jscs": "^1.10.0",
-    "jshint": "^2.6.0",
-    "tape": "^3.4.0"
+    "standard": "^6.0.8"
   },
   "scripts": {
-    "test": "jshint *.js && jscs *.js"
+    "test": "standard"
   },
   "author": "Bert Spaan",
   "license": "MIT",
   "dependencies": {
     "highland": "^2.6.0",
-    "jsonstream": "^1.0.3",
+    "JSONStream": "^1.0.3",
     "shp2json": "^1.1.1"
-  },
-  "jshintConfig": {
-    "node": true,
-    "globalstrict": false,
-    "undef": true,
-    "unused": true,
-    "noarg": true
-  },
-  "jscsConfig": {
-    "preset": "airbnb",
-    "requireCamelCaseOrUpperCaseIdentifiers": null,
-    "disallowMultipleVarDecl": true,
-    "requireMultipleVarDecl": null
   }
 }

@@ -1,16 +1,10 @@
-var fs = require('fs');
-var path = require('path');
-var H = require('highland');
-var shp2json = require('shp2json');
-var JSONStream = require('JSONStream');
+var fs = require('fs')
+var path = require('path')
+var H = require('highland')
+var shp2json = require('shp2json')
+var JSONStream = require('JSONStream')
 
-var writeObjects = function(writer, object, callback) {
-  writer.writeObject(object, function(err) {
-    callback(err);
-  });
-};
-
-function getFeatures(filename) {
+function getFeatures (filename) {
   var years = filename.match(/(\d{4})/g)
 
   if (years.length === 1) {
@@ -23,14 +17,14 @@ function getFeatures(filename) {
     .pipe(JSONStream.parse('features.*'))
 
   return H(features)
-    .map(feature => {
+    .map((feature) => {
       feature.properties.validSince = parseInt(years[0])
       feature.properties.validUntil = parseInt(years[1])
       return feature
     })
 }
 
-function convertFeatures(feature) {
+function convertFeatures (feature) {
   var name = feature.properties.Ward
 
   var id = [
@@ -49,32 +43,29 @@ function convertFeatures(feature) {
       validUntil: feature.properties.validUntil,
       geometry: feature.geometry
     }
-  };
+  }
 }
 
-function convert(config, dir, writer, callback) {
-  var readdir = H.wrapCallback(fs.readdir);
+function transform (config, dirs, tools, callback) {
+  var readdir = H.wrapCallback(fs.readdir)
 
-  var filenames = readdir(path.join(__dirname, 'shapefiles'))
+  readdir(path.join(__dirname, 'shapefiles'))
     .flatten()
-    .filter(f => f.endsWith('zip'))
+    .filter((f) => f.endsWith('zip'))
     .map(getFeatures)
     .flatten()
     .map(convertFeatures)
     .compact()
-    .map(H.curry(writeObjects, writer))
+    .flatten()
+    .map(H.curry(tools.writer.writeObject))
     .nfcall([])
     .series()
-    .stopOnError(function(err) {
-      callback(err);
-    })
-    .done(function() {
-      callback();
-    });
+    .stopOnError(callback)
+    .done(callback)
 }
 
 // ==================================== API ====================================
 
 module.exports.steps = [
-  convert
-];
+  transform
+]
