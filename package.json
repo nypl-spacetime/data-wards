@@ -12,8 +12,8 @@
   "author": "Bert Spaan",
   "license": "MIT",
   "dependencies": {
-    "highland": "^2.6.0",
-    "JSONStream": "^1.0.3",
-    "shp2json": "^1.1.1"
+    "highland": "^2.7.4",
+    "JSONStream": "^1.1.1",
+    "shp2json": "^1.2.0"
   }
 }
