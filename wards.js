@@ -4,6 +4,8 @@ var H = require('highland')
 var shp2json = require('shp2json')
 var JSONStream = require('JSONStream')
 
+var errors = []
+
 function getFeatures (filename) {
   var years = filename.match(/(\d{4})/g)
 
@@ -13,7 +15,15 @@ function getFeatures (filename) {
 
   var stream = fs.createReadStream(path.join(__dirname, 'shapefiles', filename))
 
-  var features = shp2json(stream)
+  var geojson = H(shp2json(stream))
+
+  features = geojson
+    .stopOnError((err) => {
+      errors.push({
+        filename: filename,
+        error: err
+      })
+    })
     .pipe(JSONStream.parse('features.*'))
 
   return H(features)
@@ -54,14 +64,22 @@ function transform (config, dirs, tools, callback) {
     .filter((f) => f.endsWith('zip'))
     .map(getFeatures)
     .flatten()
-    .map(convertFeatures)
     .compact()
+    .map(convertFeatures)
     .flatten()
+    .compact()
     .map(H.curry(tools.writer.writeObject))
     .nfcall([])
     .series()
     .stopOnError(callback)
-    .done(callback)
+    .done(() => {
+      if (errors.length) {
+        var message = errors.map((err) => `${err.filename}: ${err.error.message || err.error}`).join(', ')
+        callback(new Error(message))
+      } else {
+        callback()
+      }
+    })
 }
 
 // ==================================== API ====================================
