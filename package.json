@@ -13,7 +13,6 @@
   "license": "MIT",
   "dependencies": {
     "highland": "^2.7.4",
-    "JSONStream": "^1.1.1",
-    "shp2json": "^1.2.0"
+    "JSONStream": "^1.1.1"
   }
 }
