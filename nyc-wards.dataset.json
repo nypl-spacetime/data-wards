@@ -1,8 +1,8 @@
 {
-  "id": "wards",
+  "id": "nyc-wards",
   "title": "NYC Wards",
   "license": "Public Domain",
-  "description": "NYC Wards",
+  "description": "Boundaries of NYC wards - from 1703 to 1895",
   "author": "NYPL",
   "website": "http://www.nypl.org/",
   "edits": "",
