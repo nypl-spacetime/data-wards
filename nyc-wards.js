@@ -31,11 +31,11 @@ function convertFeatures (feature) {
   ].join('-')
 
   return {
-    type: 'pit',
+    type: 'object',
     obj: {
       id: id,
       name: name,
-      type: 'hg:Ward',
+      type: 'st:Ward',
       validSince: feature.properties.validSince,
       validUntil: feature.properties.validUntil,
       geometry: feature.geometry

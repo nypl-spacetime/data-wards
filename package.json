@@ -1,13 +1,17 @@
 {
-  "name": "spacetime-etl-wards",
-  "version": "0.6.1",
-  "description": "Convert NYC wards shapefiles to Histograph NDJSON",
-  "main": "geonames.js",
+  "name": "spacetime-etl-nyc-wards",
+  "version": "1.0.0",
+  "description": "Space/Time ETL module: converts NYC wards shapefiles to Space/Time NDJSON",
+  "main": "nyc-wards.js",
   "devDependencies": {
     "standard": "^6.0.8"
   },
   "scripts": {
     "test": "standard"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/nypl-spacetime/etl-nyc-wards.git"
   },
   "author": "Bert Spaan",
   "license": "MIT",
