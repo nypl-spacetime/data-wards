@@ -9,7 +9,7 @@
 
     <tr>
       <td>ID</td>
-      <td>`nyc-wards`</td>
+      <td><code>nyc-wards</code></td>
     </tr>
 
     <tr>
