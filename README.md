@@ -44,12 +44,12 @@
 
 ## Available steps
 
-    - `transform`
+  - `transform`
 
 ## Usage
 
 ```
-spacetime-etl nyc-wards :step
+spacetime-etl nyc-wards <step>
 ```
 
 See http://github.com/nypl-spacetime/spacetime-etl for information about Space/Time's ETL tool.
