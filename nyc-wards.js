@@ -2,6 +2,7 @@ var fs = require('fs')
 var path = require('path')
 var H = require('highland')
 var JSONStream = require('JSONStream')
+const rewind = require('geojson-rewind')
 
 function getFeatures (filename) {
   var years = filename.match(/(\d{4})/g)
@@ -38,7 +39,7 @@ function convertFeatures (feature) {
       type: 'st:Ward',
       validSince: feature.properties.validSince,
       validUntil: feature.properties.validUntil,
-      geometry: feature.geometry
+      geometry: rewind(feature.geometry, false)
     }
   }
 }
