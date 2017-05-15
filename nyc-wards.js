@@ -1,17 +1,17 @@
-var fs = require('fs')
-var path = require('path')
-var H = require('highland')
-var JSONStream = require('JSONStream')
+const fs = require('fs')
+const path = require('path')
+const H = require('highland')
+const JSONStream = require('JSONStream')
 const rewind = require('geojson-rewind')
 
 function getFeatures (filename) {
-  var years = filename.match(/(\d{4})/g)
+  let years = filename.match(/(\d{4})/g)
 
   if (years.length === 1) {
     years = [years[0], years[0]]
   }
 
-  var features = fs.createReadStream(path.join(__dirname, 'geojson', filename))
+  const features = fs.createReadStream(path.join(__dirname, 'geojson', filename))
     .pipe(JSONStream.parse('features.*'))
 
   return H(features)
@@ -23,9 +23,9 @@ function getFeatures (filename) {
 }
 
 function convertFeatures (feature) {
-  var name = feature.properties.Ward
+  const name = feature.properties.Ward
 
-  var id = [
+  const id = [
     feature.properties.validSince,
     feature.properties.validUntil,
     name.toLowerCase()
@@ -45,7 +45,7 @@ function convertFeatures (feature) {
 }
 
 function transform (config, dirs, tools, callback) {
-  var readdir = H.wrapCallback(fs.readdir)
+  const readdir = H.wrapCallback(fs.readdir)
 
   readdir(path.join(__dirname, 'geojson'))
     .flatten()
