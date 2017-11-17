@@ -3,7 +3,21 @@
   "title": "NYC Wards",
   "license": "CC0",
   "description": "Boundaries of NYC wards - from 1703 to 1895",
-  "author": "Matt Knutzen",
-  "website": "http://www.nypl.org/",
-  "editor": "Bert Spaan"
+  "homepage": "http://spacetime.nypl.org/#data-nyc-wards",
+  "sources": [
+    {
+      "title": "Shapefiles of wards",
+      "path": "https://github.com/nypl-spacetime/etl-nyc-wards/tree/master/shapefiles"
+    }
+  ],
+  "contributors": [
+    {
+      "title": "Bert Spaan",
+      "role": "editor"
+    },
+    {
+      "title": "Matt Knutzen",
+      "role": "author"
+    }
+  ]
 }
